@@ -1,0 +1,92 @@
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+body {
+  font-size: 40px;
+  font-family: Arial;
+  background: gainsboro;
+  padding: 0;
+  text-align: center;
+}
+
+p {
+  margin: 0px;
+  padding: 0;
+
+  color: #ffffcc;
+  text-shadow: 0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px green,
+    0 0 30px green,
+    0 0 40px green,
+    0 0 55px green,
+    0 0 70px green;
+}
+
+p::first-letter {
+  font-size: 150%;
+  color: #8A2BE2;
+}
+
+input {
+  width: 6.2em;
+  font-size: 29px;
+}
+
+body {
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
