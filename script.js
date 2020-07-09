@@ -2,17 +2,20 @@ var alphabet = "abcdefghijklmnopqrstuvwxyz";
 var output = "";
 var successes = 0;
 
-var randomInt = Math.floor(Math.random() * (alphabet.length - 3));
-output = output + alphabet[randomInt];
+// var randomInt = Math.floor(Math.random() * (alphabet.length - 3));
+// output = output + alphabet[randomInt];
 
 for (var i = 0; i <= 33; i++) {
+  /*
   if (output[i - 1] == " ") {
     randomInt = Math.floor(Math.random() * (alphabet.length - 3));
   } else {
     randomInt = Math.floor(Math.random() * alphabet.length);
   }
+  */
 
-  console.log(i + ": " + alphabet[randomInt]);
+  randomInt = Math.floor(Math.random() * alphabet.length);
+
   output = output + alphabet[randomInt];
 }
 
