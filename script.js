@@ -1,59 +1,135 @@
 var alphabet = "abcdefghijklmnopqrstuvwxyz";
+var enabledLetters = true;
+var enabledNumbers = false;
+var enabledCharacters = false;
+
 var output = "";
 var successes = 0;
+var outputHTML = "";
 
-// var randomInt = Math.floor(Math.random() * (alphabet.length - 3));
-// output = output + alphabet[randomInt];
+var scoreHTML = document.getElementById("score");
 
-for (var i = 0; i <= 33; i++) {
-  /*
-  if (output[i - 1] == " ") {
-    randomInt = Math.floor(Math.random() * (alphabet.length - 3));
-  } else {
-    randomInt = Math.floor(Math.random() * alphabet.length);
-  }
-  */
+generateText();
+
+function generateText() {
+  output = "";
+  successes = 0;
+  outputHTML = "";
+  document.getElementById("text").innerHTML = "";
+
+  if (alphabet == "") { return; }
 
   randomInt = Math.floor(Math.random() * alphabet.length);
 
   output = output + alphabet[randomInt];
+  outputHTML = "<span id=\"firstChar\">" + output[0] + "</span>" + output.slice(1);
+
+  for (var i = 0; i <= 19; i++) {
+    randomInt = Math.floor(Math.random() * alphabet.length);
+
+    output = output + alphabet[randomInt];
+    outputHTML = outputHTML + alphabet[randomInt];
+  }
+
+  document.getElementById("text").innerHTML = outputHTML;
+  document.getElementById("score").innerHTML = "Score: " + successes;
 }
 
-document.getElementById("text").innerHTML = output;
 
-document.getElementById("successes").innerHTML = "Score: " + successes;
+function enableNumbers() {
+  if (!enabledNumbers) {
+    alphabet += "1234567890";
+    enabledNumbers = true;
+  } else {
+    alphabet = alphabet.replace("1234567890", "");
+    enabledNumbers = false;
+  }
+  document.getElementById("userInput").value = "";
+  generateText();
+}
 
-function trackChange(value, activatedPreviously) {
+function enableCharacters() {
+  if (!enabledCharacters) {
+    alphabet += "!@#$%^&*()";
+    enabledCharacters = true;
+  } else {
+    alphabet = alphabet.replace("!@#$%^&*()", "");
+    console.log(alphabet);
+    enabledCharacters = false;
+  }
+  document.getElementById("userInput").value = "";
+  generateText();
+}
 
-  /*
-  console.log(value);
-  console.log("value[value.length - 1]: " + value[value.length - 1]);
-  console.log("output[0]: " + output[0]);
-  */
+function enableLetters() {
+  if (!enabledLetters) {
+    alphabet += "abcdefghijklmnopqrstuvwxyz";
+    enabledLetters = true;
+  } else {
+    alphabet = alphabet.replace("abcdefghijklmnopqrstuvwxyz", "");
+    console.log(alphabet);
+    enabledLetters = false;
+  }
+  document.getElementById("userInput").value = "";
+  generateText();
+}
+
+function trackChange(value, thisElement) {
+
+  if (alphabet == "") { return; }
 
   if (value[value.length - 1] == output[0]) {
 
-    successes++;
-    document.getElementById("successes").innerHTML = "Score: " + successes;
+    /*
+    var fristChar = document.getElementById("firstChar");
 
-    if (output[i - 1] == " ") {
-      randomInt = Math.floor(Math.random() * (alphabet.length - 3));
-    } else {
-      randomInt = Math.floor(Math.random() * alphabet.length);
+    if (fristChar.style.webkitAnimationName !== 'dissapear') {
+      fristChar.style.webkitAnimationName = 'dissapear';
+      fristChar.style.webkitAnimationDuration = '300ms';
+
+      setTimeout(function () {
+        fristChar.style.webkitAnimationName = '';
+      }, 300);
+    }
+    */
+
+    if (thisElement.style.webkitAnimationName !== 'colorchange') {
+      thisElement.style.webkitAnimationName = 'colorchange';
+      thisElement.style.webkitAnimationDuration = '250ms';
+
+      setTimeout(function () {
+        thisElement.style.webkitAnimationName = '';
+      }, 250);
     }
 
-    // output = "<b>" + output[successes - 1] + "</b>" + output.slice(1) + alphabet[randomInt];
-    output = output.slice(1) + alphabet[randomInt];
+    successes++;
+    scoreHTML.innerHTML = "Score: " + successes;
 
-    document.getElementById("text").innerHTML = output;
+    randomInt = Math.floor(Math.random() * alphabet.length);
+
+    output = output.slice(1) + alphabet[randomInt];
+    console.log(output);
+
+    outputHTML = "<span id=\"firstChar\">" + output[0] + "</span>" + output.slice(1);
+    console.log(outputHTML);
+
+    document.getElementById("text").innerHTML = outputHTML;
   }
   /* 
-         else {
-             console.log(value.length);
-             
-             successes--;
-             document.getElementById("successes").innerHTML = "Score: " + successes;
-         }
-         */
+  else {
+    if (e.style.webkitAnimationName !== 'colorchangered') {
+    e.style.webkitAnimationName = 'colorchangered';
+    e.style.webkitAnimationDuration = '250ms';
+
+    // make sure to reset the name after 4 seconds, otherwise another call to colorchange wont have any effect
+    setTimeout(function () {
+      e.style.webkitAnimationName = '';
+    }, 250);
+    }
+      
+    successes--;
+    document.getElementById("successes").innerHTML = "Score: " + successes;
+  }
+   */
 
 }

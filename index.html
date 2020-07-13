@@ -16,12 +16,18 @@
 
     <div class="centered">
 
-        <p id="successes"></p>
+        <button type="button" onclick="enableLetters()">Letters</button>
+        <button type="button" onclick="enableNumbers()">Numbers</button>
+        <button type="button" onclick="enableCharacters()">Characters</button>
 
-        <p id="text"></p>
+        <div class="neon">
+            <h4 id="score"></h4>
 
-        <input type="text" value="Type or DIE!!!" onfocus=this.value='' onkeyup="trackChange(this.value)"
-            onkeydown="trackChange(this.value)" id="userInput" name="userInput"><br>
+            <p id="text"></p>
+        </div>
+
+        <input class="neon" type="text" value="Type or DIE!!!" onfocus=this.value='' onkeyup="trackChange(this.value, this)"
+            onkeydown="trackChange(this.value, this)" id="userInput" name="userInput">
 
     </div>
 
