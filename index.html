@@ -14,13 +14,42 @@
 
 <body>
 
-    <div class="centered">
+    <div>
+        <h4 id="highestScore">Your highest score: 0</h4>
+    </div>
 
-        <button type="button" onclick="enableLetters()">Letters</button>
-        <button type="button" onclick="enableNumbers()">Numbers</button>
-        <button type="button" onclick="enableCharacters()">Characters</button>
+    <div id="centered">
 
         <div class="neon">
+
+            <table>
+                <tr>
+                    <th> <label for="letters">Letters</label> </th>
+                    <th> <label for="numbers">Numbers</label> </th>
+                    <th> <label for="characters">Characters</label> </th>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" onclick="enableLetters()" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" onclick="enableNumbers()">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" onclick="enableCharacters()">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+
             <h4 id="score"></h4>
 
             <p id="text"></p>

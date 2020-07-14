@@ -4,18 +4,26 @@ var enabledNumbers = false;
 var enabledCharacters = false;
 
 var output = "";
-var successes = 0;
+var score = 0;
+var highestScore = 0;
 var outputHTML = "";
 
 var scoreHTML = document.getElementById("score");
+var highestScoreHTML = document.getElementById("highestScore");
 
 generateText();
 
 function generateText() {
   output = "";
-  successes = 0;
+
+  if (score > highestScore) {
+    highestScore = score;
+  }
+
+  score = 0;
   outputHTML = "";
   document.getElementById("text").innerHTML = "";
+  document.getElementById("score").innerHTML = "Score: " + score;
 
   if (alphabet == "") { return; }
 
@@ -32,7 +40,6 @@ function generateText() {
   }
 
   document.getElementById("text").innerHTML = outputHTML;
-  document.getElementById("score").innerHTML = "Score: " + successes;
 }
 
 
@@ -102,8 +109,12 @@ function trackChange(value, thisElement) {
       }, 250);
     }
 
-    successes++;
-    scoreHTML.innerHTML = "Score: " + successes;
+    score++;
+    scoreHTML.innerHTML = "Score: " + score;
+
+    if (highestScore < score) {
+      highestScoreHTML.innerHTML = "Your highest score: " + score;
+    }
 
     randomInt = Math.floor(Math.random() * alphabet.length);
 
@@ -127,8 +138,8 @@ function trackChange(value, thisElement) {
     }, 250);
     }
       
-    successes--;
-    document.getElementById("successes").innerHTML = "Score: " + successes;
+    score--;
+    document.getElementById("score").innerHTML = "Score: " + score;
   }
    */
 
