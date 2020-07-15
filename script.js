@@ -2,28 +2,40 @@ var alphabet = "abcdefghijklmnopqrstuvwxyz";
 var enabledLetters = true;
 var enabledNumbers = false;
 var enabledCharacters = false;
+var timerIsOn = false;
+
+var timerInterval;
 
 var output = "";
 var score = 0;
-var highestScore = 0;
-var outputHTML = "";
 
+var highestScore = 0;
+if (getCookie("highestScore") != 0) { highestScore = getCookie("highestScore"); }
+
+var outputHTML = "";
 var scoreHTML = document.getElementById("score");
 var highestScoreHTML = document.getElementById("highestScore");
+
+highestScoreHTML.innerHTML = "Your highest score: " + highestScore;
+
+var seconds = 0;
+var minutes = 0;
 
 generateText();
 
 function generateText() {
   output = "";
+  resetTimer();
 
   if (score > highestScore) {
     highestScore = score;
+    setCookie("highestScore", highestScore, 30);
   }
 
   score = 0;
   outputHTML = "";
   document.getElementById("text").innerHTML = "";
-  document.getElementById("score").innerHTML = "Score: " + score;
+  scoreHTML.innerHTML = "Score: " + score;
 
   if (alphabet == "") { return; }
 
@@ -61,7 +73,6 @@ function enableCharacters() {
     enabledCharacters = true;
   } else {
     alphabet = alphabet.replace("!@#$%^&*()", "");
-    console.log(alphabet);
     enabledCharacters = false;
   }
   document.getElementById("userInput").value = "";
@@ -74,7 +85,6 @@ function enableLetters() {
     enabledLetters = true;
   } else {
     alphabet = alphabet.replace("abcdefghijklmnopqrstuvwxyz", "");
-    console.log(alphabet);
     enabledLetters = false;
   }
   document.getElementById("userInput").value = "";
@@ -82,6 +92,11 @@ function enableLetters() {
 }
 
 function trackChange(value, thisElement) {
+
+  if (!timerIsOn) { 
+    timerInterval = setInterval(timer, 1000);
+    timerIsOn = true;
+  }
 
   if (alphabet == "") { return; }
 
@@ -113,16 +128,16 @@ function trackChange(value, thisElement) {
     scoreHTML.innerHTML = "Score: " + score;
 
     if (highestScore < score) {
-      highestScoreHTML.innerHTML = "Your highest score: " + score;
+      highestScore = score;
+      highestScoreHTML.innerHTML = "Your highest score: " + highestScore;
+      setCookie("highestScore", highestScore, 30);
     }
 
     randomInt = Math.floor(Math.random() * alphabet.length);
 
     output = output.slice(1) + alphabet[randomInt];
-    console.log(output);
 
     outputHTML = "<span id=\"firstChar\">" + output[0] + "</span>" + output.slice(1);
-    console.log(outputHTML);
 
     document.getElementById("text").innerHTML = outputHTML;
   }
@@ -143,4 +158,42 @@ function trackChange(value, thisElement) {
   }
    */
 
+}
+
+function timer() {
+  seconds++;
+  if (seconds == 60) {
+    minutes++;
+    seconds = 0;
+  }
+  document.getElementById("timer").innerHTML = minutes + "m:" + seconds + "s";
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerIsOn = false;
+  minutes = seconds = 0;
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
