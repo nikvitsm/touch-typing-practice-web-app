@@ -3,6 +3,7 @@ var enabledLetters = true;
 var enabledNumbers = false;
 var enabledCharacters = false;
 var timerIsOn = false;
+var bugs = false;
 
 var timerInterval;
 
@@ -91,8 +92,27 @@ function enableLetters() {
   generateText();
 }
 
-function trackChange(value, thisElement) {
+function disableAnim() {
+  // console.log(document.body);
+  // document.body.innerHTML = "";
+  //document.body.innerHTML.animation.pause();
+  var animatedBack = document.getElementById("animatedBack");
+  if (!bugs) {
+    animatedBack.style.animationPlayState='paused';
+    spiders = new SpiderController({'minBugs':20, 'maxBugs':35});
+    number = spiders.bugs.length - 1;
+    bugs = true;
+  } else {
+    spiders.end();
+    animatedBack.style.animationPlayState='running';
+    bugs = false;
+  }
 
+
+  console.log(spiders.bugs);
+}
+
+function trackChange(value, thisElement) {
   if (!timerIsOn) { 
     timerInterval = setInterval(timer, 1000);
     timerIsOn = true;
@@ -102,7 +122,18 @@ function trackChange(value, thisElement) {
 
   if (value[value.length - 1] == output[0]) {
 
+    // randomInt = Math.floor(Math.random() * spiders.bugs.length);
+    if (bugs && number >= 0) {
+      spiders.bugs[number].die();
+      number--;
+    } else if (bugs) {
+      spiders.reset();
+      number = spiders.bugs.length - 1;
+    }
+
     /*
+    
+    
     var fristChar = document.getElementById("firstChar");
 
     if (fristChar.style.webkitAnimationName !== 'dissapear') {

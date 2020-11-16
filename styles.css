@@ -70,7 +70,9 @@ body {
   font-size: 40px;
   text-align: center;
   font-family: Calibri;
+}
 
+#animatedBack {
   background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
@@ -235,4 +237,32 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* Basic Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  font-size: 20px;
+
+  visibility: hidden;
+  width: fit-content;
+  background-color: #8A2BE2;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

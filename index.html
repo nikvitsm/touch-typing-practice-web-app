@@ -7,15 +7,16 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script type='text/javascript' src='js/bug-min.js'></script>
 
     <title>Touch Typing Practice</title>
 </head>
 
-<body>
+<body id="animatedBack">
 
     <div>
-        <h4 id="highestScore">Your highest score: </h4>
+        <h4 id="highestScore" class="neon">Your highest score: </h4>
     </div>
 
     <div id="centered">
@@ -29,6 +30,7 @@
                     <th> <label for="letters">Letters</label> </th>
                     <th> <label for="numbers">Numbers</label> </th>
                     <th> <label for="characters">Characters</label> </th>
+                    <th> <label for="bugs">Bugs ( ಠ◡ಠ )</label>  </th>
                 </tr>
                 <tr>
                     <td>
@@ -47,6 +49,13 @@
                         <label class="switch">
                             <input type="checkbox" onclick="enableCharacters()">
                             <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="switch tooltip">
+                            <input type="checkbox" onclick="disableAnim()">
+                            <span class="slider round"></span>
+                            <span class="tooltiptext">Type to kill the bugs</span>
                         </label>
                     </td>
                 </tr>
